@@ -8,30 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var userData = UserData(name: "鈴木", age: 20)
+    @EnvironmentObject var userData: UserData
+    
     var body: some View {
         VStack{
-            Button(action: {userData.name = "佐藤"}){
-                Text("名前を変える")
-                    .padding()
+            Button(action: {
+                userData.age += 1
+            }){
+                Text("年齢を増やす")
             }
-            Button(action: {userData.age+=1}){
-                Text("加算する")
-                    .padding()
-            }
+            Text("ContentView:\(userData.name)の年齢は\(userData.age)")
+                .padding()
             
-            Text("\(userData.name)の年齢")
-            Text("\(userData.age)の年齢")
+            AnotherContentView()
+            
         }
     }
 }
 
 
+struct AnotherContentView: View{
+    @EnvironmentObject var userData: UserData
+    var body: some View{
+        Text("Another content view:\(userData.name)の年齢は\(userData.age)")
+    }
+}
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserData())
     }
 }
-
