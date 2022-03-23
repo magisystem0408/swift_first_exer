@@ -8,36 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var userData: UserData
-    
+    @State var favoritAnimal = ""
     var body: some View {
+        //            onCommitでリターンした時に何かが発火する
         VStack{
-            Button(action: {
-                userData.age += 1
-            }){
-                Text("年齢を増やす")
-            }
-            Text("ContentView:\(userData.name)の年齢は\(userData.age)")
+            TextField("好きな動物を入力してください",text: $favoritAnimal,onCommit: {
+                favoritAnimal = ""
+            })
+            Text("好きな動物は\(favoritAnimal)です。")
                 .padding()
-            
-            AnotherContentView()
-            
+        
         }
     }
 }
 
-
-struct AnotherContentView: View{
-    @EnvironmentObject var userData: UserData
-    var body: some View{
-        Text("Another content view:\(userData.name)の年齢は\(userData.age)")
-    }
-}
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(UserData())
     }
 }
