@@ -10,12 +10,6 @@ import SwiftUI
 
 //ユーザーデータ
 class UserData: ObservableObject{
-    @Published var name: String
-    @Published var age: Int
-    
-    init(name: String,age:Int){
-        self.name = name
-        self.age = age
-    }
-    
+    @Published var name = "田中"
+    @Published var age = 25
 }
